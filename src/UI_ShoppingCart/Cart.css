@@ -1,0 +1,70 @@
+#outer{
+    height: auto;
+    width: 100%;
+}
+#form{
+    height: 350px;
+    width: 40%;
+    /* background-color: aqua; */
+    margin:20px auto;
+    text-align: left;
+}
+.inpproductItem{
+    height: 30px;
+    width:100%;
+    margin-bottom: 10px;
+    border: 1px solid rgb(134, 134, 134);
+    border-radius:5px;
+}
+input:focus{
+    outline: none;
+}
+#btnAddCart{
+    height: 40px;
+    width: 25%;
+    margin-right: 100%;
+    margin-top: 20px;
+    border:none;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: rgb(48 227 218);
+}
+#cart{
+    height: auto;
+    width: 40%;
+    margin: auto;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+   
+  }
+  
+  td, th {
+    /* border: 1px solid #dddddd; */
+    text-align: left;
+    padding: 8px;
+    /* text-align: center; */
+  }
+  .inpQuant{
+    height: 20px;
+    width: 50px;
+    text-align: center;
+  }
+  #btndel{
+    height: 35px;
+    padding: 10px;
+    font-size: 17px;
+    background: #fb1039;
+    border: none;
+    border-radius: 7px;
+    color: white;
+  }
+  .btnUpdate{
+    height: 30px;
+    font-size: 14px;
+    background: none;
+    border-radius: 5px;
+    border: 1px solid #0fbdb5;
+  }
