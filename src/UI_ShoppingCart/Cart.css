@@ -5,7 +5,6 @@
 #form{
     height: 350px;
     width: 40%;
-    /* background-color: aqua; */
     margin:20px auto;
     text-align: left;
 }
@@ -37,21 +36,18 @@ input:focus{
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
-   
-  }
+    width: 100%; 
+}
   
   td, th {
-    /* border: 1px solid #dddddd; */
     text-align: left;
     padding: 8px;
-    /* text-align: center; */
-  }
+}
   .inpQuant{
     height: 20px;
     width: 50px;
     text-align: center;
-  }
+}
   #btndel{
     height: 35px;
     padding: 10px;
@@ -60,7 +56,7 @@ table {
     border: none;
     border-radius: 7px;
     color: white;
-  }
+}
   .btnUpdate{
     height: 30px;
     font-size: 14px;
