@@ -1,49 +1,79 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct } from '../Redux/cartSlice';
+
+import { fetchData } from '../Redux/cartSlice';
+import { store } from '../Redux/store';
+import { addCartData } from '../Redux/cartSlice';
+import { deleteCartData } from '../Redux/cartSlice';
+import { updateCartData} from '../Redux/cartSlice'; 
 const ShoppingCart = () => {
-  const[cartData,setCartData]=useState([]);
-  const state=useSelector((state)=>state)
+  const stateData=useSelector((state)=>state)
   const dispatch=useDispatch();
   useEffect(()=>{
-    const fetchData=async()=>{
-           await fetch("https://dummyjson.com/carts")
-           .then(res=>res.json())
-           .then((resp)=>{
-            setCartData([...resp.carts[0].products]);
-            console.log(resp.carts[0].products)
-          });
-    }
-    fetchData();
-  },[])
+    dispatch(fetchData())
+  },[]);
+
   const addItem=()=>{
-    dispatch(addProduct());
+    let productId=document.getElementById("prodId").value;
+    let productQuantity=document.getElementById("prodquantity").value;
+    let obj={
+      userId:1,
+      products:[{id:productId,quantity:productQuantity}]
+    } 
+    if( productId=="",productQuantity==""){
+      alert("please fill the all field");
+    }else{
+    dispatch(addCartData(obj));
+    document.getElementById("prodId").value="";
+    document.getElementById("prodquantity").value="";
+    stateData.Reducer.status="Data is added suceessfuly";
   }
-  console.log(state)
+  }
+const updateData=(e)=>{
+  let productId=e.target.getAttribute("pid");
+  console.log()
+  let obj={
+    userId:1,
+    products: [
+      {
+        id: productId,
+        quantity: 20,
+      },
+    ]
+  }
+dispatch(updateCartData(obj));
+}
+const deleteData=()=>{
+  dispatch(deleteCartData());
+  stateData.Reducer.status="Data is deleted suceessfuly";
+}
+  console.log( store.getState())
   return (
     <div id="outer">
       <div id="form">
         <h1>Add to Cart</h1>
         <hr></hr>
         <p>Product Id</p>
-        <input className='inpproductItem'/>
+        <input id="prodId" type="number" className='inpproductItem'/>
         <p>Quantity</p>
-        <input className='inpproductItem'/><br></br>
+        <input id="prodquantity" type="number" className='inpproductItem'/><br></br>
         <button id="btnAddCart" onClick={addItem}>Add To Cart</button>
         <hr></hr>
+        {stateData.Reducer.status=="loading"?<center><img alt='' height="40px" width="50px" src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif"></img></center>:<div id="displayStatus"><p>{stateData.Reducer.status}</p></div>}
+
       </div>
       <div id="cart">
         <h1>Shopping Cart</h1>
         <hr></hr>
-        <button id="btndel">Delete Cart</button>
+        
+        <button id="btndel" onClick={deleteData}>Delete Cart</button>
         <table>
           <tr><th>S.No.</th><th>Title</th><th>Quantity</th><th>Action</th><th>Price</th></tr>
-          <tr><td>1</td><td>Ram</td><td><input className='inpQuant' type="text" value="3"/></td><td><button className='btnUpdate'>Update</button></td><td><span>1200</span></td></tr>
          {
-          cartData.map((item,i)=>{
+          stateData.Reducer.cart.map((item,i)=>{
             return(
               <>
-              <tr><td>{item.id}</td><td>{item.title}</td><td><input className='inpQuant' type="text" value={item.quantity}/></td><td><button className='btnUpdate'>Update</button></td><td><span>{item.total}</span></td></tr>
+              <tr><td>{item.id}</td><td>{item.title}</td><td><input className='inpQuant' type="text" value={item.quantity}/></td><td><button className='btnUpdate' onClick={updateData} pid={item.id}>Update</button></td><td><span>{item.total}</span></td></tr>
               </>
             )
           })
